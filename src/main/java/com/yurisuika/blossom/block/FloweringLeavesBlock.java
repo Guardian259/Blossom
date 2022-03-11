@@ -2,6 +2,7 @@ package com.yurisuika.blossom.block;
 
 import java.util.Random;
 
+import eu.pb4.polymer.api.block.PolymerBlock;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,7 +31,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 
-public class FloweringLeavesBlock extends Block implements Fertilizable {
+public class FloweringLeavesBlock extends Block implements PolymerBlock, Fertilizable {
     private final Block shearedBlock;
 
     public static final int MAX_DISTANCE = 7;
@@ -220,4 +221,13 @@ public class FloweringLeavesBlock extends Block implements Fertilizable {
         AGE = Properties.AGE_7;
     }
 
+    @Override
+    public Block getPolymerBlock(BlockState state) {
+        return Blocks.OAK_LEAVES;
+    }
+
+    @Override
+    public BlockState getPolymerBlockState(BlockState state) {
+        return Blocks.OAK_LEAVES.getDefaultState().with(Properties.AGE_7, AGE);
+    }
 }
